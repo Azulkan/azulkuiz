@@ -1,0 +1,137 @@
+.lb-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 24px;
+  gap: 32px;
+}
+
+.lb-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  .trophy { font-size: 2rem; }
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// Podium
+.podium {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  justify-content: center;
+}
+
+.podium-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+.podium-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-card);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  min-width: 130px;
+  transition: transform 0.2s;
+
+  &:hover { transform: translateY(-4px); }
+}
+
+.podium-medal { font-size: 2rem; }
+
+.podium-name {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: center;
+  word-break: break-word;
+}
+
+.podium-score {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--accent-1);
+}
+
+.podium-base {
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.podium-rank {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.rank-1 .podium-card {
+  border-color: #fbbf24;
+  box-shadow: 0 0 24px rgba(251,191,36,0.3);
+  transform: translateY(-16px);
+  min-width: 160px;
+
+  .podium-medal { font-size: 2.5rem; }
+  .podium-name  { font-size: 1.1rem; }
+  .podium-score { font-size: 1.75rem; }
+}
+
+.rank-2 .podium-card { border-color: #9ca3af; }
+.rank-3 .podium-card { border-color: #b45309; }
+
+// Rest list
+.rest-list {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.rest-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+}
+
+.rest-rank {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  width: 30px;
+}
+
+.rest-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.rest-score {
+  font-weight: 800;
+  color: var(--accent-1);
+}
+
+.play-again { margin-top: 8px; }

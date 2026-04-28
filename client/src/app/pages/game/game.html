@@ -1,0 +1,19 @@
+<div class="game-wrap">
+  @switch (gameState.phase()) {
+    @case ('WAITING') {
+      <app-lobby />
+    }
+    @case ('QUESTION') {
+      <app-question [locked]="false" />
+    }
+    @case ('LOCKED') {
+      <app-question [locked]="true" />
+    }
+    @case ('REVIEW') {
+      <app-review />
+    }
+    @case ('LEADERBOARD') {
+      <app-leaderboard />
+    }
+  }
+</div>

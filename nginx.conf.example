@@ -1,0 +1,38 @@
+server {
+    listen 80;
+    server_name azulkuiz.local;  # Replace with your domain or IP
+
+    root /home/azulkan/Git/azulkuiz/client/dist/client/browser;
+    index index.html;
+
+    # Serve question images directly (faster than proxying to Node)
+    location /images/ {
+        alias /home/azulkan/Git/azulkuiz/public/images/;
+        expires 1d;
+        add_header Cache-Control "public, immutable";
+    }
+
+    # API
+    location /api/ {
+        proxy_pass         http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Real-IP $remote_addr;
+    }
+
+    # WebSocket — keep-alive for long game sessions
+    location /ws {
+        proxy_pass         http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header   Upgrade $http_upgrade;
+        proxy_set_header   Connection "upgrade";
+        proxy_set_header   Host $host;
+        proxy_read_timeout 3600s;
+        proxy_send_timeout 3600s;
+    }
+
+    # Angular SPA fallback
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+}

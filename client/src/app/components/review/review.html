@@ -1,0 +1,83 @@
+<div class="review-wrap">
+
+  <!-- Left: question tabs + answers -->
+  <div class="review-main">
+    <div class="review-header">
+      <h2 class="review-title">Answer Review</h2>
+      @if (gameState.isAdmin()) {
+        <button class="btn btn-primary" (click)="endReview()">Finish &amp; Show Scores</button>
+      } @else {
+        <span class="badge badge-info">Watching review…</span>
+      }
+    </div>
+
+    <!-- Question tabs -->
+    <div class="q-tabs">
+      @for (q of gameState.allQuestions(); track q.index) {
+        <button
+          class="q-tab"
+          [class.active]="activeQIndex() === q.index"
+          (click)="selectQuestion(q.index)"
+        >
+          Q{{ q.index + 1 }}
+        </button>
+      }
+    </div>
+
+    <!-- Active question preview -->
+    @if (activeQuestion()) {
+      <div class="q-preview card">
+        @if (activeQuestion()!.image) {
+          <img [src]="'/images/' + activeQuestion()!.image" class="q-preview-img" alt="Question image" />
+        }
+        @if (activeQuestion()!.text) {
+          <p class="q-preview-text">{{ activeQuestion()!.text }}</p>
+        }
+      </div>
+    }
+
+    <!-- Answers list -->
+    <div class="answers-list">
+      @if (activeAnswers().length === 0) {
+        <p class="text-muted" style="padding:20px; text-align:center">No answers for this question.</p>
+      }
+      @for (ans of activeAnswers(); track ans.playerId) {
+        <div
+          class="answer-card"
+          [class.valid]="ans.valid === true"
+          [class.invalid]="ans.valid === false"
+        >
+          <div class="answer-meta">
+            <span class="answer-username">{{ ans.username }}</span>
+            @if (ans.valid === true) {
+              <span class="badge badge-ok">Valid</span>
+            } @else if (ans.valid === false) {
+              <span class="badge badge-err">Invalid</span>
+            } @else {
+              <span class="badge badge-warn">Pending</span>
+            }
+          </div>
+          <p class="answer-text">{{ ans.answer }}</p>
+          @if (gameState.isAdmin()) {
+            <div class="answer-actions">
+              <button class="btn btn-ok" (click)="markAnswer(ans, true)" [disabled]="ans.valid === true">✓ Valid</button>
+              <button class="btn btn-err" (click)="markAnswer(ans, false)" [disabled]="ans.valid === false">✗ Invalid</button>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Right: live scores -->
+  <div class="scores-panel">
+    <h3 class="scores-title">Live Scores</h3>
+    @for (player of sortedPlayers(); track player.playerId) {
+      <div class="score-row">
+        <span class="score-name">{{ player.username }}</span>
+        <span class="score-val">{{ gameState.scores()[player.playerId] ?? 0 }}</span>
+      </div>
+    }
+  </div>
+
+</div>

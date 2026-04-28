@@ -1,0 +1,86 @@
+<div class="question-wrap">
+
+  <!-- Timer bar -->
+  <div class="timer-bar-wrap">
+    <div class="timer-bar-track">
+      <div
+        class="timer-bar"
+        [style.width.%]="gameState.timerPct()"
+        [style.background]="timerColor()"
+      ></div>
+    </div>
+    <span class="timer-label">{{ gameState.timerRemaining() }}s</span>
+  </div>
+
+  <!-- Question number -->
+  <div class="q-meta">
+    <span class="q-number">Question {{ (gameState.currentQuestion()?.index ?? 0) + 1 }} / {{ gameState.questionCount() }}</span>
+    @if (!gameState.isAdmin()) {
+      <span class="answered-count text-muted">
+        {{ gameState.answeredCount() }}/{{ playerCount() }} answered
+      </span>
+    }
+  </div>
+
+  <!-- Image (full-width if present) -->
+  @if (gameState.imageUrl()) {
+    <div class="q-image-wrap">
+      <img [src]="gameState.imageUrl()" alt="Question image" class="q-image" />
+    </div>
+  }
+
+  <!-- Question text -->
+  @if (gameState.currentQuestion()?.text) {
+    <div class="q-text">{{ gameState.currentQuestion()!.text }}</div>
+  }
+
+  <!-- Answer area (players only) -->
+  @if (!gameState.isAdmin()) {
+    <div class="answer-area">
+      @if (gameState.hasAnswered()) {
+        <div class="answered-msg">
+          <span class="badge badge-ok">Answer submitted!</span>
+          <p class="text-muted" style="margin-top:8px">Waiting for other players…</p>
+        </div>
+      } @else {
+        <textarea
+          [(ngModel)]="answer"
+          placeholder="Type your answer here…"
+          rows="3"
+          [disabled]="locked()"
+          (keydown)="onKeydown($event)"
+          class="answer-input"
+        ></textarea>
+        <button
+          class="btn btn-primary btn-lg submit-btn"
+          [disabled]="!answer.trim() || locked()"
+          (click)="submitAnswer()"
+        >
+          @if (locked()) { Time's up! } @else { Submit Answer }
+        </button>
+      }
+    </div>
+  } @else {
+    <!-- Admin view: answer count + locked status -->
+    <div class="admin-status">
+      <div class="answered-pill">
+        <span class="answered-num">{{ gameState.answeredCount() }}</span>
+        <span class="text-muted">/ {{ playerCount() }} players answered</span>
+      </div>
+      @if (locked()) {
+        <button class="btn btn-purple btn-lg" (click)="nextQuestion()">
+          Next →
+        </button>
+      } @else {
+        <p class="text-muted admin-hint">Timer running — click Next after it expires to advance.</p>
+      }
+    </div>
+  }
+
+  @if (locked() && !gameState.isAdmin()) {
+    <div class="locked-banner">
+      <span class="badge badge-warn">Time's up — waiting for host to continue</span>
+    </div>
+  }
+
+</div>

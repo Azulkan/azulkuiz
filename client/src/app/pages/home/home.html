@@ -1,0 +1,67 @@
+<div class="home-wrap">
+  <div class="logo">
+    <span class="logo-az">Az</span><span class="logo-ul">ul</span><span class="logo-kuiz">kuiz</span>
+  </div>
+  <p class="tagline">Real-time multiplayer quiz</p>
+
+  <div class="mode-tabs">
+    <button class="tab" [class.active]="mode() === 'join'" (click)="switchMode('join')">Join Game</button>
+    <button class="tab" [class.active]="mode() === 'create'" (click)="switchMode('create')">Host Game</button>
+  </div>
+
+  <div class="form-card card">
+    @if (mode() === 'join') {
+      <form (ngSubmit)="joinRoom()">
+        <div class="field">
+          <label>Room Code</label>
+          <input
+            type="text"
+            [(ngModel)]="joinToken"
+            name="token"
+            placeholder="ABCD12"
+            maxlength="6"
+            autocomplete="off"
+            class="code-input"
+          />
+        </div>
+        <div class="field">
+          <label>Your Username</label>
+          <input
+            type="text"
+            [(ngModel)]="joinUsername"
+            name="username"
+            placeholder="Enter your name"
+            maxlength="24"
+            autocomplete="off"
+          />
+        </div>
+        @if (error()) {
+          <p class="error-msg">{{ error() }}</p>
+        }
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="loading()">
+          @if (loading()) { Joining… } @else { Join Room }
+        </button>
+      </form>
+    } @else {
+      <form (ngSubmit)="createRoom()">
+        <div class="field">
+          <label>Your Username (Admin)</label>
+          <input
+            type="text"
+            [(ngModel)]="createUsername"
+            name="username"
+            placeholder="Enter your name"
+            maxlength="24"
+            autocomplete="off"
+          />
+        </div>
+        @if (error()) {
+          <p class="error-msg">{{ error() }}</p>
+        }
+        <button type="submit" class="btn btn-purple btn-lg" [disabled]="loading()">
+          @if (loading()) { Creating… } @else { Create Room }
+        </button>
+      </form>
+    }
+  </div>
+</div>

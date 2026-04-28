@@ -1,0 +1,112 @@
+.home-wrap {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  gap: 16px;
+}
+
+.logo {
+  font-size: 3.5rem;
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+
+  .logo-az  { color: var(--accent-1); }
+  .logo-ul  { color: #fff; }
+  .logo-kuiz { color: var(--accent-2); }
+}
+
+.tagline {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.mode-tabs {
+  display: flex;
+  gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 4px;
+
+  .tab {
+    flex: 1;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 10px;
+    background: transparent;
+    color: var(--text-muted);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+
+    &.active {
+      background: var(--bg-card2);
+      color: var(--text);
+    }
+    &:hover:not(.active) { color: var(--text); }
+  }
+}
+
+.form-card {
+  width: 100%;
+  max-width: 420px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  input {
+    background: rgba(255,255,255,0.04);
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 1rem;
+    padding: 12px 16px;
+    outline: none;
+    transition: border-color 0.2s;
+
+    &::placeholder { color: var(--text-muted); }
+    &:focus { border-color: var(--accent-1); }
+  }
+}
+
+.code-input {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  text-align: center;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.error-msg {
+  color: var(--accent-err);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.btn-lg {
+  width: 100%;
+  margin-top: 4px;
+}

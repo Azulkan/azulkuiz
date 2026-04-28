@@ -1,0 +1,40 @@
+<div class="lb-wrap">
+  <div class="lb-title">
+    <span class="trophy">🏆</span>
+    <h1>Final Scores</h1>
+  </div>
+
+  <!-- Podium: 2nd - 1st - 3rd -->
+  <div class="podium">
+    @for (rank of podium; track rank) {
+      @let entry = getPodiumEntry(rank);
+      @if (entry) {
+        <div class="podium-slot" [class]="'rank-' + rank">
+          <div class="podium-card">
+            <div class="podium-medal">{{ rank === 1 ? '🥇' : rank === 2 ? '🥈' : '🥉' }}</div>
+            <div class="podium-name">{{ entry.username }}</div>
+            <div class="podium-score">{{ entry.score }}</div>
+          </div>
+          <div class="podium-base">
+            <span class="podium-rank">#{{ rank }}</span>
+          </div>
+        </div>
+      }
+    }
+  </div>
+
+  <!-- Rest of ranking -->
+  @if (restEntries().length > 0) {
+    <div class="rest-list">
+      @for (entry of restEntries(); track entry.playerId) {
+        <div class="rest-row">
+          <span class="rest-rank">#{{ entry.rank }}</span>
+          <span class="rest-name">{{ entry.username }}</span>
+          <span class="rest-score">{{ entry.score }}</span>
+        </div>
+      }
+    </div>
+  }
+
+  <button class="btn btn-ghost btn-lg play-again" (click)="playAgain()">Play Again</button>
+</div>

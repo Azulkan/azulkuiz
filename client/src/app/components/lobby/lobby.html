@@ -1,0 +1,55 @@
+<div class="lobby">
+  <div class="lobby-header">
+    <div class="room-block">
+      <span class="room-label">Room Code</span>
+      <div class="room-token">
+        <span class="token-text">{{ gameState.token() }}</span>
+        <button class="copy-btn" (click)="copyToken()" title="Copy code">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <div class="waiting-msg">
+      @if (gameState.isAdmin()) {
+        <p>Share the room code with players, then start when everyone is ready.</p>
+      } @else {
+        <p>Waiting for the host to start the game…</p>
+      }
+    </div>
+  </div>
+
+  <div class="players-section">
+    <div class="players-header">
+      <span class="players-title">Players</span>
+      <span class="players-count badge badge-info">{{ gameState.players().length }}</span>
+    </div>
+    <div class="players-grid">
+      @for (player of gameState.players(); track player.playerId) {
+        <div class="player-card" [class.offline]="!player.connected">
+          <span class="player-dot" [class.online]="player.connected"></span>
+          <span class="player-name">{{ player.username }}</span>
+        </div>
+      } @empty {
+        <p class="no-players text-muted">No players yet. Share the code above!</p>
+      }
+    </div>
+  </div>
+
+  @if (gameState.isAdmin()) {
+    <div class="start-section">
+      <button
+        class="btn btn-primary btn-lg"
+        [disabled]="!canStart"
+        (click)="startGame()"
+      >
+        Start Game
+      </button>
+      @if (!canStart) {
+        <p class="text-muted" style="font-size:0.85rem; margin-top:8px">Waiting for at least one player to join.</p>
+      }
+    </div>
+  }
+</div>

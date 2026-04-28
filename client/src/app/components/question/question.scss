@@ -1,0 +1,163 @@
+.question-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 0 40px;
+}
+
+// Timer bar
+.timer-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-card);
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.timer-bar-track {
+  flex: 1;
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+.timer-bar {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s linear, background 0.5s ease;
+}
+
+.timer-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  width: 32px;
+  text-align: right;
+}
+
+// Meta row
+.q-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px 0;
+}
+
+.q-number {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.answered-count {
+  font-size: 0.85rem;
+}
+
+// Image — full width, constrained height
+.q-image-wrap {
+  width: 100%;
+  background: #000;
+  margin-top: 20px;
+  max-height: 400px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.q-image {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+}
+
+// Question text
+.q-text {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 24px 24px 0;
+  text-align: center;
+}
+
+// Answer area
+.answer-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px;
+}
+
+.answer-input {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(255,255,255,0.04);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 1.1rem;
+  padding: 14px 18px;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s;
+
+  &::placeholder { color: var(--text-muted); }
+  &:focus { border-color: var(--accent-1); }
+  &:disabled { opacity: 0.5; }
+}
+
+.submit-btn {
+  max-width: 300px;
+  width: 100%;
+}
+
+.answered-msg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 16px;
+  font-size: 1rem;
+}
+
+// Admin status
+.admin-status {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 24px;
+}
+
+.answered-pill {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.answered-num {
+  font-size: 3rem;
+  font-weight: 900;
+  color: var(--accent-1);
+}
+
+.admin-hint {
+  font-size: 0.875rem;
+  text-align: center;
+}
+
+.locked-banner {
+  text-align: center;
+  padding: 16px;
+}

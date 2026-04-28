@@ -1,0 +1,17 @@
+{
+  "defaultTimeLimit": 20,
+  "questions": [
+    {
+      "text": "Name the original game with this logo.",
+      "image": "01.png"
+    },
+    {
+      "text": "Name the game studio who created 'Clair Obscur: Expedition 33'.",
+      "image": null
+    },
+    {
+      "text": "What year did Portal release?",
+      "image": null
+    }
+  ]
+}
